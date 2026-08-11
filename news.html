@@ -13,6 +13,8 @@
 Antellay Space - News & Insights
 </title>
     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 <style>
         * {
             margin: 0;
@@ -194,9 +196,22 @@ Antellay Space - News & Insights
             color: #fff;
             transition: background .25s ease, color .25s ease;
         }
-        .mobile-menu a:hover, .mobile-menu a.active {
-            background: rgba(255, 137, 77, .12);
-            color: var(--orange2);
+.mobile-menu a:hover, .mobile-menu a.active {
+ background: rgba(255, 137, 77, .12);
+ color: var(--orange2);
+ }
+        .mobile-menu.open {
+            animation: menuIn .3s cubic-bezier(.2, .7, .2, 1);
+        }
+        @keyframes menuIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -12px) scale(.98);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0) scale(1);
+            }
         }
         /* Hero Section */        .hero {
             position: relative;
@@ -214,7 +229,7 @@ Antellay Space - News & Insights
             content: '';
             position: absolute;
             inset: -100px;
-            background: url('assets/images/ChatGPT Image Aug 11, 2026, 09_44_19 AM.png') no-repeat center center/cover;
+            background: url('assets/images/ChatGPT Image Aug 6, 2026, 01_37_51 PM.png') no-repeat center center/cover;
             z-index: 0;
             will-change: transform;
             animation: heroShrink 14s ease-in-out infinite alternate;
@@ -639,16 +654,42 @@ Antellay Space - News & Insights
         }
         footer {
             border-top: 1px solid var(--line);
-            padding: 26px 0 24px;
+            padding: 90px 0 40px;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            z-index: 0;
         }
         .footer-top {
+            position: relative;
+            z-index: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 30px;
+        }
+        footer.page {
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        footer.page .footer-top,
+        footer.page .copyright {
+            width: 100%;
+            max-width: min(1190px, calc(100% - 48px));
+            margin: 0 auto;
         }
         footer .brand {
  margin: 0;
@@ -690,6 +731,8 @@ Antellay Space - News & Insights
             transition: color .3s, border-color .3s;
         }
         .copyright {
+            position: relative;
+            z-index: 1;
             border-top: 1px solid rgba(154, 179, 202, .3);
             padding-top: 18px;
             text-align: center;
@@ -842,8 +885,8 @@ Antellay Space - News & Insights
  padding: 14px 24px;
  }
             footer {
- padding: 22px 20px 23px;
- gap: 18px;
+ padding: 60px 20px 30px;
+ gap: 40px;
  }
             .footer-top {
  flex-wrap: wrap;
@@ -1448,6 +1491,8 @@ SUBSCRIBE
     
 <footer class="page">
         
+<video class="footer-video" autoplay muted loop playsinline src="assets/videos/WhatsApp Video 2026-08-11 at 12.12.58 PM.mp4"></video>
+        
 <div class="footer-top">
             
 <a class="brand" href="index.html">
@@ -1476,7 +1521,7 @@ SPACE
             
 <div class="socials">
                 
-<a href="#" aria-label="LinkedIn">
+<a href="https://www.linkedin.com/company/a-n-t-e-l-l-a-y-space/posts/?feedView=all" target="_blank" aria-label="LinkedIn">
 in
 </a>
                 
@@ -1488,8 +1533,8 @@ in
 &#9993;
 </a>
                 
-<a href="#" aria-label="Instagram">
-@
+<a href="https://www.instagram.com/antellay.tech?igsh=NDBoa3NoMjZ2Ynk3" target="_blank" aria-label="Instagram">
+<i class="fa-brands fa-instagram"></i>
 </a>
             
 </div>
@@ -1501,7 +1546,7 @@ in
 </div>
         
 <div class="copyright">
-&copy; 2026 ANTELLAY SPACE. All Rights Reserved.
+&copy; 2026 ANTELLAY Tech. All Rights Reserved. A Celebso Group Company.
 </div>
     
 </footer>

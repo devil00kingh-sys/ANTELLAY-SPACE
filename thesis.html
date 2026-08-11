@@ -42,6 +42,7 @@ Antellay Space - Thesis
             color: var(--text-main);
             overflow-x: hidden;
             display: flex;
+            flex-direction: column;
         }
         /* --- SITE HEADER (same as index.html) --- */        .site-header {
             position: fixed;
@@ -184,8 +185,21 @@ Antellay Space - Thesis
             color: #fff;
             text-decoration: none;
         }
-        .mobile-menu a:hover, .mobile-menu a.active {
-            color: #ff9a57;
+.mobile-menu a:hover, .mobile-menu a.active {
+ color: #ff9a57;
+ }
+        .mobile-menu.open {
+            animation: menuIn .3s cubic-bezier(.2, .7, .2, 1);
+        }
+        @keyframes menuIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -12px) scale(.98);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0) scale(1);
+            }
         }
         /* --- MAIN CONTENT --- */        main {
             width: 100%;
@@ -229,12 +243,13 @@ Antellay Space - Thesis
             text-align: center;
             margin: -100px -60px 0;
         }
-        .hero::before {
-            content: '';
+        .hero-video {
             position: absolute;
             inset: -100px;
+            width: calc(100% + 200px);
+            height: calc(100% + 200px);
+            object-fit: cover;
             z-index: 0;
-            background: url('assets/images/ChatGPT Image Aug 11, 2026, 09_44_19 AM.png') center center / cover no-repeat;
             will-change: transform;
             animation: heroShrink 14s ease-in-out infinite alternate;
         }
@@ -562,8 +577,24 @@ Antellay Space - Thesis
         /* --- SEC 7: MISSION --- */        .mission-panel {
             border-radius: 12px;
             padding: 70px 60px;
-            background: linear-gradient(to right, rgba(3,4,6,0.9) 40%, transparent 100%),                        url('assets/images/ChatGPT Image Aug 6, 2026, 03_11_49 PM.png') center / cover;
             border: 1px solid var(--border-panel);
+            overflow: hidden;
+            position: relative;
+        }
+        .mission-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .mission-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         .mission-panel h2 {
             font-size: 2rem;
@@ -587,16 +618,19 @@ Antellay Space - Thesis
             gap: 10px;
             cursor: pointer;
             font-family: inherit;
+            text-decoration: none;
         }
         .btn-solid {
-            background: transparent;
-            color: var(--accent);
+            background: rgba(240, 106, 37, 0.92);
+            color: #fff;
             border: 1px solid var(--accent);
+            box-shadow: 0 4px 22px rgba(240, 106, 37, 0.35);
         }
         .btn-dim {
-            background: transparent;
-            color: var(--text-dim);
-            border: 1px solid var(--border-panel);
+            background: rgba(10, 14, 20, 0.88);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
         }
         /* --- FOOTER (matches home page) --- */        .page {
             position: relative;
@@ -606,16 +640,42 @@ Antellay Space - Thesis
         }
         footer {
             border-top: 1px solid var(--border-light);
-            padding: 26px 0 24px;
+            padding: 90px 0 40px;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            z-index: 0;
         }
         .footer-top {
+            position: relative;
+            z-index: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 30px;
+        }
+        footer.page {
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        footer.page .footer-top,
+        footer.page .copyright {
+            width: 100%;
+            max-width: min(1190px, calc(100% - 48px));
+            margin: 0 auto;
         }
         footer .brand {
  margin: 0;
@@ -657,6 +717,8 @@ Antellay Space - Thesis
             transition: color .3s, border-color .3s;
         }
         .copyright {
+            position: relative;
+            z-index: 1;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
             padding-top: 18px;
             text-align: center;
@@ -838,26 +900,28 @@ Antellay Space - Thesis
             transform: translateY(-3px);
             background: var(--accent);
             color: #fff;
-            box-shadow: 0 0 26px rgba(240, 106, 37, .45);
+            box-shadow: 0 0 30px rgba(240, 106, 37, .6);
         }
         .btn-dim:hover {
             transform: translateY(-3px);
-            border-color: var(--accent);
-            color: var(--text-main);
-        }
-        .mission-panel {
-            animation: slowZoom 20s ease-in-out infinite alternate;
+            border-color: rgba(255, 255, 255, 0.9);
+            background: rgba(240, 106, 37, 0.25);
+            color: #fff;
+            box-shadow: 0 0 22px rgba(240, 106, 37, .3);
         }
         .mission-panel .tag, .mission-panel h2, .mission-panel .divider, .mission-panel .btn-group {
             animation: none;
         }
         @keyframes slowZoom {
             from {
- background-size: 100% auto;
+ transform: scale(1);
  }
             to {
- background-size: 110% auto;
+ transform: scale(1.08);
  }
+        }
+        .mission-video {
+            animation: slowZoom 20s ease-in-out infinite alternate;
         }
         .vision-bg {
             animation: bgDrift 16s ease-in-out infinite alternate;
@@ -990,6 +1054,9 @@ Antellay Space - Thesis
  font-size: 1.5rem;
  letter-spacing: 0.12em;
  }
+            .flow-diagram::before, .flow-diagram::after {
+                display: none;
+            }
             .grid-container {
  grid-template-columns: repeat(2, 1fr);
  gap: 10px;
@@ -1035,8 +1102,8 @@ Antellay Space - Thesis
  justify-content: center;
  }
             footer {
- padding: 22px 16px 23px;
- gap: 18px;
+ padding: 60px 16px 30px;
+ gap: 40px;
  }
             .footer-top {
  flex-wrap: wrap;
@@ -1158,6 +1225,8 @@ Contact Us
 <!-- SECTION 1: HERO -->
         
 <section class="hero">
+            
+<img class="hero-video" src="assets/images/ChatGPT Image Aug 6, 2026, 01_37_51 PM.png" alt="Antellay Space thesis">
             
 <span class="tag hero-in">
 OUR THESIS
@@ -1687,10 +1756,14 @@ READY
         
 <section class="mission-panel reveal">
             
+<video class="mission-video" autoplay muted loop playsinline src="assets/videos/WhatsApp Video 2026-08-09 at 11.51.44 AM.mp4"></video>
+            
+<div class="mission-content">
+                
 <span class="tag">
 OUR MISSION
 </span>
-            
+                
 <h2>
 BUILDING THE
 <br>
@@ -1698,36 +1771,42 @@ AI OPERATING SYSTEM
 <br>
 FOR THE SPACE ECONOMY
 </h2>
-            
+                
 <div class="divider">
 
 </div>
-            
-<div class="btn-group">
                 
-<button class="btn-solid">
+<div class="btn-group">
+                    
+<a class="btn-solid" href="index.html#spaceos">
 EXPLORE SPACESOS 
 <i class="fa-solid fa-arrow-right">
 
 </i>
 
-</button>
-                
-<button class="btn-dim">
+</a>
+                    
+<a class="btn-dim" href="contact.html">
 REQUEST DEMO 
 <i class="fa-solid fa-arrow-right">
 
 </i>
 
-</button>
+</a>
+                
+</div>
             
 </div>
         
 </section>
         
+</main>
+        
 <!-- FOOTER -->
         
 <footer class="page">
+            
+<video class="footer-video" autoplay muted loop playsinline src="assets/videos/WhatsApp Video 2026-08-11 at 12.12.58 PM.mp4"></video>
             
 <div class="footer-top">
                 
@@ -1757,7 +1836,7 @@ SPACE
                 
 <div class="socials">
                     
-<a href="#" aria-label="LinkedIn">
+<a href="https://www.linkedin.com/company/a-n-t-e-l-l-a-y-space/posts/?feedView=all" target="_blank" aria-label="LinkedIn">
 in
 </a>
                     
@@ -1769,8 +1848,8 @@ in
 &#9993;
 </a>
                     
-<a href="#" aria-label="Instagram">
-@
+<a href="https://www.instagram.com/antellay.tech?igsh=NDBoa3NoMjZ2Ynk3" target="_blank" aria-label="Instagram">
+<i class="fa-brands fa-instagram"></i>
 </a>
                 
 </div>
@@ -1782,12 +1861,10 @@ in
 </div>
             
 <div class="copyright">
-&copy; 2026 ANTELLAY SPACE. All Rights Reserved.
+&copy; 2026 ANTELLAY Tech. All Rights Reserved. A Celebso Group Company.
 </div>
         
 </footer>
-    
-</main>
     
 <script>
         const menuToggle = document.querySelector(".menu-toggle");        const mobileMenu = document.querySelector("#mobile-menu");        if (menuToggle && mobileMenu) {            menuToggle.addEventListener("click", () =>

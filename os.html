@@ -36,14 +36,18 @@ body{min-width:320px}
   from{transform:scale(1.08) translate3d(0,0,0)}
   to{transform:scale(1) translate3d(-60px,25px,0)}
 }
+@keyframes heroZoom{
+  from{transform:scale(1.06)}
+  to{transform:scale(1)}
+}
 .os-page > *{position:relative;z-index:2}
 .os-header{text-align:center;padding:64px 20px 24px;position:relative;z-index:2}
 .kicker{
   color:#ff7625;font-size:12px;letter-spacing:4px;margin-bottom:18px
 }
 h1{
-  margin:0;font-size:clamp(40px,5.7vw,69px);font-weight:300;
-  letter-spacing:6px;line-height:1.05
+  margin:0;font-size:clamp(24px,5.2vw,69px);font-weight:300;
+  letter-spacing:clamp(2px,.8vw,6px);line-height:1.05
 }
 .tagline{margin:17px 0 0;color:#b8c0c6;font-size:17px;font-weight:300}
 .diagram{
@@ -206,15 +210,37 @@ h1{
  .left{grid-row:1}
 }
 @media(max-width:620px){
- .os-header{padding-top:40px}
- h1{letter-spacing:3px}
- .diagram{display:block;width:92%;min-height:auto}
- .left{display:grid;grid-template-columns:1fr 1fr}
+ .os-page{padding-top:52px}
+ .os-header{padding-top:34px}
+ h1{font-size:clamp(18px,6vw,36px);letter-spacing:1.5px}
+ .tagline{font-size:15px}
+ .diagram{display:block;width:94%;min-height:auto}
+ .left{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ .source.has-img{height:158px}
  .center{padding-top:45px}.right{padding-top:65px}
+ .os-footer{padding:48px 18px 38px}
+ .os-footer h2{font-size:clamp(17px,5.4vw,28px);letter-spacing:2px}
+ .os-footer h3{font-size:clamp(15px,4.8vw,27px);letter-spacing:2px}
+ .os-footer p{font-size:13px;letter-spacing:.5px}
+ .os-page:before{animation:heroZoom 14s ease-in-out infinite alternate}
+ .earth{animation:earthFloat 9s ease-in-out infinite}
+ .sat{animation-duration:3.4s}
 }
 @media(max-width:460px){
  .left{display:block}.source{margin-bottom:12px}
- .earth{width:240px;height:240px}
+ .earth{width:min(240px,72vw);height:min(240px,72vw)}
+ .core{width:min(247px,86vw)}
+}
+@media(max-width:400px){
+ .left{display:grid;grid-template-columns:1fr;gap:10px}
+ .source{margin-bottom:0}
+ .source.has-img{height:140px}
+ .source h3{font-size:12px}
+ .source small{font-size:9px}
+ .kicker{letter-spacing:3px}
+ .os-footer h2{font-size:16px;letter-spacing:1.5px}
+ .os-footer h3{font-size:14px;letter-spacing:1px}
+ .intel{margin-top:38px}
 }
 </style>
 </head>

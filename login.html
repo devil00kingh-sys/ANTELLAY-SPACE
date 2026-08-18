@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Antellay Space Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
     :root {
         --primary-orange: #d57a44;
         --text-white: #ffffff;
@@ -25,13 +26,15 @@
 
     body {
         background-color: #050a15;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         color: var(--text-white);
         position: relative;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 20px 0;
     }
 
     body::before {
@@ -45,19 +48,40 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        filter: blur(0);
         z-index: -1;
+        animation: bgDrift 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgDrift {
+        0% {
+            transform: scale(1.05) translate(0, 0);
+        }
+        50% {
+            transform: scale(1.15) translate(-2%, -2%);
+        }
+        100% {
+            transform: scale(1.05) translate(2%, 2%);
+        }
     }
 
     .container {
         width: 100%;
         max-width: 480px;
-        padding: 40px 20px;
+        margin: auto;
+        padding: 50px 40px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        zoom: 0.85;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        background: rgba(20, 25, 35, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+        zoom: 0.82;
     }
 
     /* Logo Section */
@@ -75,7 +99,7 @@
     }
 
     .brand-title {
-        font-size: 24px;
+        font-size: clamp(20px, 6vw, 24px);
         font-weight: 700;
         letter-spacing: 8px;
         margin-bottom: 8px;
@@ -132,7 +156,7 @@
     }
 
     .welcome-name {
-        font-size: 36px;
+        font-size: clamp(28px, 8vw, 36px);
         font-weight: 600;
         letter-spacing: 4px;
     }
@@ -156,9 +180,13 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        fill: var(--text-gray);
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: var(--text-gray);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 
     .input-group .icon-left {
@@ -168,6 +196,11 @@
     .input-group .icon-right {
         right: 15px;
         cursor: pointer;
+        pointer-events: auto;
+    }
+
+    .input-group .icon-right:hover {
+        stroke: var(--text-white);
     }
 
     .input-group input {
@@ -219,26 +252,6 @@
         color: var(--text-white);
     }
 
-    .contact-btn {
-        width: 100%;
-        max-width: 380px;
-        padding: 16px;
-        background-color: transparent;
-        color: var(--text-white);
-        border: 1px solid var(--primary-orange);
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: background 0.3s ease, color 0.3s ease;
-        margin-bottom: 30px;
-    }
-
-    .contact-btn:hover {
-        background-color: var(--primary-orange);
-    }
-
     /* Footer Notice Section */
     .footer-notice {
         display: flex;
@@ -251,6 +264,7 @@
         text-align: left;
         align-items: center;
         gap: 20px;
+        flex-wrap: wrap;
     }
 
     .notice-badge {
@@ -311,7 +325,7 @@
     </div>
 
     <!-- Form -->
-    <form class="login-form">
+    <form class="login-form" onsubmit="return false;">
         <div class="input-group">
             <!-- User Icon SVG -->
             <svg class="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -319,10 +333,20 @@
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
 
-            <input type="password" placeholder="Enter Password">
+            <input type="text" placeholder="Enter Username" autocomplete="username">
+        </div>
 
-            <!-- Eye Off Icon SVG -->
-            <svg class="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="input-group">
+            <!-- Lock Icon SVG -->
+            <svg class="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+
+            <input id="password" type="password" placeholder="Enter Password" autocomplete="current-password">
+
+            <!-- Eye Toggle Icon SVG -->
+            <svg id="toggle-eye" class="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
                 <line x1="1" y1="1" x2="23" y2="23"></line>
             </svg>
@@ -331,9 +355,6 @@
         <button type="submit" class="login-btn">LOGIN</button>
         <a href="#" class="forgot-password">Forgot Password?</a>
     </form>
-
-    <!-- Contact Us -->
-    <button type="button" class="contact-btn">CONTACT US</button>
 
     <!-- Footer Notice -->
     <div class="footer-notice">
@@ -347,6 +368,17 @@
     </div>
 
 </div>
+
+<script>
+    const password = document.getElementById('password');
+    const toggleEye = document.getElementById('toggle-eye');
+
+    toggleEye.addEventListener('click', function () {
+        const isHidden = password.type === 'password';
+        password.type = isHidden ? 'text' : 'password';
+        toggleEye.style.stroke = isHidden ? 'var(--primary-orange)' : '';
+    });
+</script>
 
 </body>
 </html>

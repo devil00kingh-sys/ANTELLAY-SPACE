@@ -14,7 +14,7 @@
       });
     }
 
-    const revealItems = document.querySelectorAll(".tile, .panel, .engine, .video-band, .stat-card, .why-copy, .why-card, footer");
+    const revealItems = document.querySelectorAll(".tile, .panel, .engine, .video-band, .stat-card, .why-copy, .why-card, footer, .product-hero, .diagram-container, .card, .center-globe-wrapper, .process-flow, .built-to-connect, .os-cta, .footer-hero, .os-header, .source, .center-column, .right-column, .fragment-stack, .core, .earth, .intel");
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
